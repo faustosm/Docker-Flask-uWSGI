@@ -13,24 +13,25 @@ node {
     
     // Configuramos os estágios
     
-    stage "Build"
+    stage ("Build") {
 
         def customImage = docker.build("${imageName}")
 
-    stage "Push"
+    stage ("Push")
 
         customImage.push()
     
-    stage "Unit Test"
+    stage ("Unit Test")
 
         teste = "fullstack"
 
 
-    stage "Deploy PROD"
+    stage ("Deploy PROD")
 
         input "Deploy to PROD?"
         customImage.push('latest')
         sh "kubectl apply -f https://raw.githubusercontent.com/cirolini/Docker-Flask-uWSGI/master/k8s_app.yaml"
         sh "kubectl set image deployment app app=${imageName} --record"
         sh "kubectl rollout status deployment/app"
+    }
 }
