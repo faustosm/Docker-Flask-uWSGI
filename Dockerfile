@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM jenkins/inbound-agent
 
 RUN apk add --virtual .build-dependencies \ 
             --no-cache \
