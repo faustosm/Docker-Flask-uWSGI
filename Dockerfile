@@ -1,5 +1,7 @@
 FROM jenkins/inbound-agent
 
+USER root
+
 RUN apk add --virtual .build-dependencies \ 
             --no-cache \
             python3-dev \
