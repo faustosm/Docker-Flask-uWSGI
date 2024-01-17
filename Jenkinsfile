@@ -14,6 +14,9 @@ node {
     // Configuramos os estágios
     
     stage ("Build") {
+        
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"        
 
         def customImage = docker.build("${imageName}")
 
